@@ -15,6 +15,7 @@ type Summarize struct {
 	EndSentenceRunes  []rune
 	QuoteTuples       [][]rune
 	IdealWordCount    int
+	MaxSentences      int
 }
 
 func New(title string, r io.Reader) Summarize {
@@ -34,7 +35,23 @@ func NewFromString(title, text string) Summarize {
 		StopWordsProvider: DefaultStopWords{},
 		TextSplitter:      DefaultTextSplitter{[]rune{'.', '!', '?'}},
 		IdealWordCount:    20,
+		MaxSentences:      5,
 	}
+}
+
+func NewFromStringWithOptions(title, text string, stopWords []string, maxSentences int) Summarize {
+	stopWordsProvider := DefaultStopWords{}
+	stopWordsProvider.AppendStopWords(stopWords)
+	summarize := Summarize{
+		Title:             title,
+		Text:              text,
+		Language:          "en",
+		StopWordsProvider: stopWordsProvider,
+		TextSplitter:      DefaultTextSplitter{[]rune{'.', '!', '?'}},
+		IdealWordCount:    20,
+		MaxSentences:      maxSentences,
+	}
+	return summarize
 }
 
 func (s Summarize) KeyPoints() []string {

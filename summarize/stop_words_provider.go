@@ -3,6 +3,7 @@ package summarize
 type StopWordsProvider interface {
 	SetLanguage(string)
 	IsStopWord(string) bool
+	AppendStopWords([]string)
 }
 
 type DefaultStopWords struct{}
@@ -32,4 +33,10 @@ func (d DefaultStopWords) IsStopWord(word string) bool {
 	_, ok := defaultStopWordsMap[word]
 
 	return ok
+}
+
+func (d DefaultStopWords) AppendStopWords(stopWords []string) {
+	for _, stopWord := range stopWords {
+		defaultStopWordsMap[stopWord] = true
+	}
 }
