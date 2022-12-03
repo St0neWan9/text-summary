@@ -47,7 +47,7 @@ func NewFromStringWithOptions(title, text string, stopWords []string, maxSentenc
 		Text:              text,
 		Language:          "en",
 		StopWordsProvider: stopWordsProvider,
-		TextSplitter:      StringTextSplitter{[]string{". ", "! ", "? ", "... ", "\" "}},
+		TextSplitter:      StringTextSplitter{[]string{". ", "! ", "? ", "... ", "\" ", ".\n", "!\n", "?\n", "...\n", "\"\n"}},
 		IdealWordCount:    20,
 		MaxSentences:      maxSentences,
 	}
