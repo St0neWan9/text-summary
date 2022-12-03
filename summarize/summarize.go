@@ -89,7 +89,7 @@ func (s Summarize) KeyPoints() []string {
 
 	var keyPoints []string
 
-	mostCommon := ranks.MostCommon(5)
+	mostCommon := ranks.MostCommon(s.MaxSentences)
 	commonMap := map[string]bool{}
 
 	for _, p := range mostCommon {
